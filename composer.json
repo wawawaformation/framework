@@ -1,0 +1,38 @@
+{
+    "name": "pestak/framework",
+    "description": "Un micro-framework PHP pour des projets rapides et modulaires.",
+    "type": "library",
+    "version": "0.1.0",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "David Legrand",
+        "email": "wawawaformation@gmail.com"
+      }
+    ],
+    "autoload": {
+      "psr-4": {
+        "Core\\": "core/",
+        "App\\": "src/"
+      }
+    },
+    "require": {
+        "php": ">=8.0",
+        "altorouter/altorouter": "^2.0",
+        "phpmailer/phpmailer": "^6.9",
+        "psr/log": "^3.0",
+        "tinymce/tinymce": "^7.6",
+        "verot/class.upload.php": "^2.1",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "phpunit/phpunit": "^11.5",
+        "symfony/var-dumper": "^7.2"
+    },
+    "config": {
+      "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+  }

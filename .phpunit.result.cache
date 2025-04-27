@@ -1,0 +1,1 @@
+{"version":1,"defects":{"LoggerTest::testLogFileIsCreated":7,"LoggerTest::testLogContentIsCorrect":8},"times":{"LoggerTest::testLogFileIsCreated":0.002,"LoggerTest::testLogContentIsCorrect":0}}
