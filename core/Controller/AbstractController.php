@@ -16,7 +16,7 @@ namespace Core\Controller;
  */
 abstract class AbstractController
 {
-    protected array $params=[];
+    protected array $params = [];
 
 
 
@@ -47,12 +47,12 @@ abstract class AbstractController
         } else {
             $viewPath = ROOT . '/view/' . $view . '.php'; // ajoute l'extension .php
         }
-    
+
         if (!file_exists($viewPath)) {
-          
+
             throw new \RuntimeException("Vue introuvable : $viewPath");
         }
-    
+
         extract($params, EXTR_OVERWRITE);
         require_once $viewPath;
     }

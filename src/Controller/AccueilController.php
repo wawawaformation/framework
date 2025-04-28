@@ -10,7 +10,7 @@ class AccueilController extends AbstractController
 {
     public function index()
     {
-       
+
         $this->render('/front/accueil.php');
     }
 }

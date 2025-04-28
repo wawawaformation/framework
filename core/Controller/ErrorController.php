@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace Core\Controller;
+
 use Core\Logger;
 
 /**
@@ -26,7 +27,7 @@ class ErrorController extends AbstractController
             $code,
             $module
         ));
-        
+
 
         http_response_code($code);
 

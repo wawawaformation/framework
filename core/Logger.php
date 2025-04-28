@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Core;
 
 use Psr\Log\LoggerInterface;
-use \Stringable;
-
+use Stringable;
 
 /**
  * Classe Logger
@@ -34,7 +33,6 @@ use \Stringable;
  */
 class Logger implements LoggerInterface
 {
-
     /**
      * Constantes de configuration pour le Logger.
      *
