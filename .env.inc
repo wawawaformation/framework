@@ -3,7 +3,7 @@ APP_ENV=dev
 APP_DEBUG=true
 
 ### Configuration des logs ###
-LOG_PATH=var/log
+LOG_PATH=/var/www/html/framework/log
 
 ### Configuration du mailer ###
 MAIL_FROM=no-reply@mon-site.fr

@@ -20,6 +20,8 @@ $dotenv->safeload();
 define('APP_ENV', $_ENV['APP_ENV'] ?? 'production');
 define('APP_DEBUG', ($_ENV['APP_DEBUG'] ?? 'false') === 'true');
 
+
+
 // Configuration du rapport d'erreurs selon l'environnement
 ini_set('display_errors', APP_DEBUG ? '1' : '0');
 ini_set('display_startup_errors', APP_DEBUG ? '1' : '0');
