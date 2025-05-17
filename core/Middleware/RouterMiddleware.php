@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Core\Middleware;
 
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use GuzzleHttp\Psr7\Response;
 
 class RouterMiddleware implements MiddlewareInterface
 {
@@ -28,7 +29,7 @@ class RouterMiddleware implements MiddlewareInterface
             $regex = '#^' . preg_replace('#\{([\w]+)\}#', '(?P<$1>[^/]+)', $routePath) . '$#';
 
             if ($method === $httpMethod && preg_match($regex, $path, $matches)) {
-                $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
+                $params = array_filter($matches, 'is_string', \ARRAY_FILTER_USE_KEY);
 
                 return $handler->handle(
                     $request

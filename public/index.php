@@ -30,10 +30,10 @@ $relay = new Relay($middlewareQueue);
 
 $response = $relay->handle($request);
 
-dump($request, $response);
+
 
 
 
 
 $emitter = new SapiEmitter();
-
+$emitter->emit($response);

@@ -110,10 +110,10 @@ class Logger implements LoggerInterface
     public function __construct(string $logDir, bool $debug = false)
     {
         $this->logDir = $logDir;
-        
+
         if (!is_dir($logDir)) {
             if ($debug) {
-                if (!is_writable(dirname($logDir))) {
+                if (!is_writable(\dirname($logDir))) {
                     throw new \Exception('Je ne peux pas créer le dossier (probleme de permissions.');
                 }
                 mkdir($logDir, 0777, true);
@@ -147,13 +147,13 @@ class Logger implements LoggerInterface
      */
     public function log($level, string|\Stringable $message, array $context = []): void
     {
-        if (!in_array($level, self::LEVELS, true)) {
-            throw new \InvalidArgumentException(sprintf('Niveau de log invalide : %s', (string) $level));
+        if (!\in_array($level, self::LEVELS, true)) {
+            throw new \InvalidArgumentException(\sprintf('Niveau de log invalide : %s', (string) $level));
         }
 
 
         // Pour l'instant, ignorer $context
-        $entry = sprintf(
+        $entry = \sprintf(
             "[%s] [%s] %s\n",
             (new \DateTime())->format('Y-m-d\TH:i:sP'),
             strtoupper((string) $level),

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Définition des routes de l’application.
  *
@@ -19,5 +21,11 @@ return [
         [\App\Controller\HomeController::class, 'index']
     ],
 
-   
+    [
+        'GET',
+        '/autre',
+        [\App\Controller\HomeController::class, 'autre']
+    ]
+
+
 ];

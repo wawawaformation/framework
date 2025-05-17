@@ -1,18 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
-use GuzzleHttp\Psr7\Response;
+use Core\Controller\AbstractController;
+use Psr\Http\Message\ResponseInterface;
 
-class HomeController
+class HomeController extends AbstractController
 {
     public function index()
     {
-        dump('controller: HomeController', 'méthode: index');
-        return new Response(
-            200,
-            ['Content-Type' => 'text/html'],
-            '<h1>Accueil</h1>'
-        );
+
+        return $this->render('home/index', ['name' => 'David']);
+    }
+
+    public function autre(): ResponseInterface
+    {
+        return $this->redirect('https://www.google.fr/');
     }
 }

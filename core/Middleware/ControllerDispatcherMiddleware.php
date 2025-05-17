@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Core\Middleware;
 
 use App\Controller\ErrorController;
@@ -7,7 +9,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Server\MiddlewareInterface;
-use GuzzleHttp\Psr7\Response;
 
 class ControllerDispatcherMiddleware implements MiddlewareInterface
 {
@@ -29,7 +30,7 @@ class ControllerDispatcherMiddleware implements MiddlewareInterface
 
         $controller = new $controllerClass();
 
-        $response = call_user_func_array([$controller, $method], $params);
+        $response = \call_user_func_array([$controller, $method], $params);
 
         if (!$response instanceof ResponseInterface) {
             return (new ErrorController())->serverError($request);

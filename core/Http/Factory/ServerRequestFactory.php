@@ -77,7 +77,7 @@ class ServerRequestFactory
      */
     private static function getAllHeaders(): array
     {
-        if (function_exists('getallheaders')) {
+        if (\function_exists('getallheaders')) {
             return getallheaders();
         }
 

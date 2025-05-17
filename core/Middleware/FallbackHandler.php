@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Core\Middleware;
 
@@ -12,7 +13,7 @@ class FallbackHandler implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        
+
         return new Response(
             404,
             ['Content-Type' => 'text/html'],
