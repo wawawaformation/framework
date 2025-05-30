@@ -145,7 +145,7 @@ class Logger implements LoggerInterface
      *
      * @throws \RuntimeException Si l'écriture dans le fichier échoue.
      */
-    public function log($level, string|\Stringable $message, array $context = []): void
+    public function log($level, string|Stringable $message, array $context = []): void
     {
         if (!\in_array($level, self::LEVELS, true)) {
             throw new \InvalidArgumentException(\sprintf('Niveau de log invalide : %s', (string) $level));

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Core\Middleware;
 
+use Core\Controller\ErrorController;
 use GuzzleHttp\Psr7\Response;
 use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -49,16 +50,7 @@ class ErrorMiddleware implements MiddlewareInterface
         } catch (\Throwable $e) {
             $this->logger->critical("Exception non interceptée : {$e->getMessage()}");
 
-            $html = <<<HTML
-                <h1>Erreur interne du serveur</h1>
-                <p>Une erreur inattendue s’est produite. Veuillez réessayer plus tard.</p>
-            HTML;
-
-            return new Response(
-                500,
-                ['Content-Type' => 'text/html; charset=UTF-8'],
-                $html
-            );
+            return (new ErrorController())->serverError($request);
         }
     }
 }

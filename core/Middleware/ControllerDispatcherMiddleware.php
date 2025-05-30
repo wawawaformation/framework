@@ -25,7 +25,7 @@ class ControllerDispatcherMiddleware implements MiddlewareInterface
             !class_exists($controllerClass) ||
             !method_exists($controllerClass, $method)
         ) {
-            return (new ErrorController())->notFound($request);
+            return (new \Core\Controller\ErrorController())->notFound($request);
         }
 
         $controller = new $controllerClass();
@@ -33,7 +33,7 @@ class ControllerDispatcherMiddleware implements MiddlewareInterface
         $response = \call_user_func_array([$controller, $method], $params);
 
         if (!$response instanceof ResponseInterface) {
-            return (new ErrorController())->serverError($request);
+            return (new \Core\Controller\ErrorController())->serverError($request);
         }
 
         return $response;

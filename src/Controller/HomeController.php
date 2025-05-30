@@ -15,8 +15,5 @@ class HomeController extends AbstractController
         return $this->render('home/index', ['name' => 'David']);
     }
 
-    public function autre(): ResponseInterface
-    {
-        return $this->redirect('https://www.google.fr/');
-    }
+
 }

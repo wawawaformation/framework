@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Core\Controller;
 
 
+use Core\Controller\Trait\FlashTrait;
 use Core\View\ViewTrait;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
@@ -20,6 +21,7 @@ abstract class AbstractController
 {
 
     use ViewTrait;
+    use FlashTrait;
 
 
     /**
@@ -61,16 +63,61 @@ abstract class AbstractController
         require $layoutPath;
         $html = ob_get_clean();
 
-        return new Response(
-            200,
-            ['Content-Type' => 'text/html'],
-            $html
+        return $this->applyDefaultHeaders(
+            new Response(
+                200,
+                [], // headers seront ajoutés dans applyDefaultHeaders()
+                $html
+            )
         );
     }
 
 
-    public function redirect(string $url, int $code = 302) : ResponseInterface
+    /**
+     * Retourne une reponse de type JSON
+     * @param array $data les données à renvoyer
+     * @param int $status code HTTP (200 par default)
+     * @return ResponseInterface
+     */
+    protected function json(array $data, int $status = 200): ResponseInterface
     {
-        return new Response($code, ['Location'=>$url]);
+        $json = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        return $this->applyDefaultHeaders(
+            new Response($status, ['Content-Type' => 'application/json'], $json)
+        );
+    }
+
+
+
+    /**
+     * Redirection
+     * @param string $url cible
+     * @param int $code code_hhtp 302 par default
+     * @return Response
+     */
+    public function redirect(string $url, int $code = 302): ResponseInterface
+    {
+        return new Response($code, ['Location' => $url]);
+    }
+
+
+
+
+
+
+    /**
+     * Ajoute des entetes
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @return ResponseInterface
+     */
+    protected function applyDefaultHeaders(ResponseInterface $response): ResponseInterface
+    {
+        return $response
+            ->withHeader('Content-Type', 'text/html; charset=utf-8')
+            ->withHeader('X-Frame-Options', 'DENY')
+            ->withHeader('X-Content-Type-Options', 'nosniff')
+            ->withHeader('X-XSS-Protection', '1; mode=block')
+            ->withHeader('Referrer-Policy', 'no-referrer')
+            ->withHeader('Permissions-Policy', 'geolocation=(), microphone=()');
     }
 }
